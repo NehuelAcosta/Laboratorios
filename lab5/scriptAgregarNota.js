@@ -9,8 +9,9 @@ const p_tags = document.getElementsByTagName("p");
 let notas = [];
 
 function agregarNota() {
-    let nota = Number(DOM_nota.value);
+    let nota = Number(DOM_nota.value); //Tomar el valor de la nota ingresada
 
+    // Verificar que el valor sea valido (entre 0 y 12)
     if (nota < 0) {
         DOM_errorMsg.textContent = "ERROR: La nota no puede ser negativa";
         return;
@@ -25,9 +26,12 @@ function agregarNota() {
 
     promedio = calcPromedio(notas);
 
+    // Modificar el campo de "Promedio" en la ficha
     DOM_promedio.textContent = "Promedio: " + promedio;
+    // Eliminar los elementos "p" que ya existían
     DOM_calificaciones.innerHTML = "";
 
+    // Mostrar cada elemento en el array de "Notas"
     for (let i = 0; i < notas.length; i++) {
         const p = document.createElement("p");
         p.textContent = "Calificación " + (i + 1) + ": " + notas[i];
@@ -47,6 +51,7 @@ function agregarNota() {
     DOM_situacion.textContent = "Situación académica: " + situacion;
 }
 
+// Agregar nuevo valor y eliminar el más antiguo
 function arrayDisplace(array) {
     let newArray = [];
     for (let i = 0; i < array.length - 1; i++) {
@@ -56,8 +61,9 @@ function arrayDisplace(array) {
     return newArray;
 }
 
+// Agregar nota al array "notas"
 function addToArray(array, value) {
-    if (array.length >= 10) {
+    if (array.length >= 10) { // Solo se tiene 
         array = arrayDisplace(array);
         array[0] = value;
     } else {
@@ -67,6 +73,7 @@ function addToArray(array, value) {
     return array;
 }
 
+// Sumar cada elemento del array y dividirlo por la cantidad total de elementos
 function calcPromedio(array){
     let suma = 0;
     for (let i = 0; i < array.length; i++) {
@@ -74,5 +81,13 @@ function calcPromedio(array){
     }
 
     promedio = suma / array.length;
-    return promedio.toFixed(1);
+
+    if (promedio % 1 === 0){
+        // Si es un entero, no es necesario usar "toFixed"
+        return parseInt(promedio);
+    } else {
+        // "toFixed(cifras)" permite redondear un numero hasta una cierta cantidad
+        // de cifras después del "."
+        return promedio.toFixed(1);
+    }
 }

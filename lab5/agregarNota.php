@@ -29,7 +29,7 @@
     <div>
         <h2>Agregar una calificación</h2>
         <label for="nota">Nota a agregar:</label>
-        <input type="number" name="nota" id="nota"><br><br>
+        <input type="number" name="nota" id="nota" min="0" max="12"><br><br>
 
         <button onclick="agregarNota()">Agregar</button>
         <p style="color: red;" id="errorMsg"></p>
