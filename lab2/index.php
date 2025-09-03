@@ -2,10 +2,10 @@
 session_start();
 
 class Multiplication {
-    public static function table($num, $min = 1, $max = 10) {
+    public static function table($num) {
         $num = (int)$num;
         $result = [];
-        for ($i = $min; $i <= $max; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $result[$i] = $num * $i;
         }
         return $result;
@@ -13,13 +13,6 @@ class Multiplication {
 }
 
 class Combinatorics {
-    public static function factorial($n) {
-        $n = (int)$n;
-        if ($n < 2) return 1;
-        $res = 1;
-        for ($i = 2; $i <= $n; $i++) $res *= $i;
-        return $res;
-    }
     public static function combination($n, $k) {
         $n = (int)$n;
         $k = (int)$k;
@@ -38,12 +31,13 @@ class Combinatorics {
 }
 
 class Lottery {
-    public static function fiveOfOroProbability() {
+    public static function fiveOfOroProbability($plays) {
         $total = Combinatorics::combination(48, 5);
-        if ($total == 0) return ['combination' => 0, 'fraction' => '0', 'one_in' => 0, 'decimal' => 0.0, 'percent' => 0.0];
-        $decimal = 1 / $total;
-        $percent = $decimal * 100;
-        return ['combination' => $total, 'fraction' => "1/$total", 'one_in' => $total, 'decimal' => $decimal, 'percent' => $percent];
+        if ($total == 0 || $plays < 1) {
+            return 0.0;
+        }
+        $prob_win = 1 - pow(1 - 1/$total, $plays);
+        return $prob_win * 100; // porcentaje
     }
 }
 
@@ -65,7 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $numero = (int)$numero;
         $table = Multiplication::table($numero);
     } elseif ($page === 'probabilidad') {
-        $prob = Lottery::fiveOfOroProbability();
+        $plays = $_POST['plays'] ?? '';
+        $plays = (int)$plays;
+        $prob_percent = Lottery::fiveOfOroProbability($plays);
     } elseif ($page === 'factorial') {
         $n = $_POST['n'] ?? '';
         $n = (int)$n;
@@ -80,14 +76,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <title>Laboratorio II - App</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 15px; }
-        nav a { margin-right: 10px; text-decoration: none; padding: 6px 10px; border-radius: 6px; background: #eee; }
-        form { margin-top: 15px; margin-bottom: 15px; }
-        table { border-collapse: collapse; margin-top: 10px; }
-        table, th, td { border: 1px solid #ccc; padding: 6px 10px; }
-        .result { background: #f9f9f9; padding: 10px; border-radius: 6px; }
-        input[type="number"] { padding: 6px; }
-        button { padding: 6px 10px; }
+        body { 
+        font-family: Arial, 
+        sans-serif; max-width: 900px; 
+        margin: 20px auto; 
+        padding: 0 15px; 
+        }
+        nav a { 
+        margin-right: 10px; 
+        text-decoration: none; 
+        padding: 6px 10px; 
+        border-radius: 6px; 
+        background: #eee; 
+        }
+        form { 
+        margin-top: 15px; 
+        margin-bottom: 15px; 
+        }
+        table { 
+        border-collapse: collapse;
+        margin-top: 10px; 
+        }
+        table, th, td { 
+        border: 1px solid #ccc; 
+        padding: 6px 10px; 
+        }
+        .result { 
+        background: #f9f9f9; 
+        padding: 10px; 
+        border-radius: 6px; 
+        }
+        input[type="number"] { 
+        padding: 6px; 
+        }
+        button {
+         padding: 6px 10px;
+        }
     </style>
 </head>
 <body>
@@ -113,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <table>
                     <tr><th>x</th><th>resultado</th></tr>
                     <?php foreach ($table as $mul => $val): ?>
-                        <tr><td><?php echo $mul; ?></td><td><?php echo $val; ?></td></tr>
+                        <tr><td><?php echo $numero . " x " . $mul; ?></td><td><?php echo $val; ?></td></tr>
                     <?php endforeach; ?>
                 </table>
             </div>
@@ -121,19 +145,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php elseif ($page === 'probabilidad'): ?>
         <h2>Probabilidad - 5 de ORO</h2>
-        <p>Selecciona 5 numeros entre 01 y 48. La probabilidad de acertar los 5 es:</p>
+        <p>Ingresa la cantidad de veces que jugaste al 5 de Oro:</p>
         <form method="post">
             <input type="hidden" name="page" value="probabilidad">
+            <label for="plays">Cantidad de jugadas:</label>
+            <input type="number" name="plays" id="plays" min="1" required>
             <button type="submit">Calcular probabilidad</button>
         </form>
 
-        <?php if (isset($prob)): ?>
+        <?php if (isset($prob_percent)): ?>
             <div class="result">
-                <p>Combinaciones totales (48 choose 5): <?php echo $prob['combination']; ?></p>
-                <p>Probabilidad en fraccion: <?php echo $prob['fraction']; ?></p>
-                <p>Probabilidad decimal: <?php echo number_format($prob['decimal'], 12, '.', ''); ?></p>
-                <p>Equivale a 1 entre <?php echo number_format($prob['one_in'], 0, '.', '.'); ?></p>
-                <p>Porcentaje aproximado: <?php echo number_format($prob['percent'], 8, '.', ''); ?> %</p>
+                <p>Con <?php echo htmlspecialchars($plays); ?> jugada(s), la probabilidad de ganar es:</p>
+                <strong><?php echo number_format($prob_percent, 8, '.', ''); ?> %</strong>
             </div>
         <?php endif; ?>
 
