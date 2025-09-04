@@ -1,55 +1,78 @@
 // Guardar DOM de las etiqutas
-const DOM_nota = document.getElementById("nota");
+const btn_submit = document.getElementById("btn-submit");
 const DOM_promedio = document.getElementById("promedio");
-const DOM_calificaciones = document.getElementById("calificaciones");
 const DOM_situacion = document.getElementById("situacion");
 const DOM_errorMsg = document.getElementById("errorMsg");
 const p_tags = document.getElementsByTagName("p");
-// Definir array de las notas
-let notas = [];
 
-function agregarNota() {
-    let nota = Number(DOM_nota.value); //Tomar el valor de la nota ingresada
-
-    // Verificar que el valor sea valido (entre 0 y 12)
-    if (nota < 0) {
-        DOM_errorMsg.textContent = "ERROR: La nota no puede ser negativa";
+// Ejecutar la función "enviarJSON()" al hacer click en el boton "btn-submit"
+btn_submit.addEventListener("click", () => {
+    let notas = guardarNotas();
+    if (!notasValidas(notas)){
         return;
-    } else if (nota > 12){
-        DOM_errorMsg.textContent = "ERROR: La nota no puede ser mayor a 12";
-        return;
-    } else {
-        DOM_errorMsg.textContent = "";
     }
+    enviarJSON(notas);
+});
 
-    notas = addToArray(notas, nota);
+// Envia un codigo JSON a un archivo php para que lo procese, y luego trae de vuelta el resultado
+function enviarJSON(notas) {
+    // Se envía un archivo JSON al archivo "scriptPromediar.php", a través del método POST
+    fetch("scriptPromediar.php", {
+        method: "POST",
+        // Enviar el array "notas"
+        headers: { "Content-Type": "application/json" }, body: JSON.stringify({ notas })
+    })
+        // JS espera a que el script php responda con otro archivo JSON, cuando recibe la respuesta, la
+        // decodifica de json a un formato utilizable por el código
+        .then(res => res.json())
 
-    promedio = calcPromedio(notas);
-
-    // Modificar el campo de "Promedio" en la ficha
-    DOM_promedio.textContent = "Promedio: " + promedio;
-    // Eliminar los elementos "p" que ya existían
-    DOM_calificaciones.innerHTML = "";
-
-    // Mostrar cada elemento en el array de "Notas"
-    for (let i = 0; i < notas.length; i++) {
-        const p = document.createElement("p");
-        p.textContent = "Calificación " + (i + 1) + ": " + notas[i];
-        DOM_calificaciones.appendChild(p);
-    }
-
-    let situacion;
-
-    if (promedio <= 3){
-        situacion = "Exámen febrero";
-    } else if (promedio <= 7){
-        situacion = "Exámen reglamentado";
-    } else {
-        situacion = "Exonerado";
-    }
-
-    DOM_situacion.textContent = "Situación académica: " + situacion;
+        // Cuando recibe el json decodificado, lo convierte en un objeto, en este caso "data", el cual
+        // tiene como atributos cada clave del json, junto con su valor correspondiente
+        .then(data => {
+            DOM_promedio.textContent = "Promedio: " + data.promedio;
+            DOM_situacion.textContent = "Situación académica: " + data.situacion;
+        })
 }
+
+function guardarNotas(){
+    let notas = [];
+
+    for (let i = 1; i <= 10; i++) {
+        // Cada nota ingresada se guarda en el array "notas[]"
+        // Traer el valor de cada input
+        let nota = document.getElementById("nota" + i).value;
+
+        // Si el input queda vacío, la nota es 0
+        if (nota == "") {
+            nota = 0;
+        }
+
+        // Guardar la nota
+        notas[i - 1] = nota;
+    }
+
+    return notas;
+}
+
+function notasValidas(notas){
+    for (let i = 0; i < notas.length; i++){
+        if (notas[i] < 0){
+            DOM_errorMsg.textContent = "ERROR: La nota no puede ser menor a 0";
+            return false;
+        }
+
+        if (notas[i] > 12){
+            DOM_errorMsg.textContent = "ERROR: La nota no puede ser mayor a 12";
+            return false;
+        }
+
+        DOM_errorMsg.textContent = "";
+        return true;
+    }
+}
+
+
+/* Estas funciones las voy a guardar por si las necesito en algun momento
 
 // Agregar nuevo valor y eliminar el más antiguo
 function arrayDisplace(array) {
@@ -74,7 +97,7 @@ function addToArray(array, value) {
 }
 
 // Sumar cada elemento del array y dividirlo por la cantidad total de elementos
-function calcPromedio(array){
+function calcPromedio(array) {
     let suma = 0;
     for (let i = 0; i < array.length; i++) {
         suma += array[i];
@@ -82,7 +105,7 @@ function calcPromedio(array){
 
     promedio = suma / array.length;
 
-    if (promedio % 1 === 0){
+    if (promedio % 1 === 0) {
         // Si es un entero, no es necesario usar "toFixed"
         return parseInt(promedio);
     } else {
@@ -91,3 +114,4 @@ function calcPromedio(array){
         return promedio.toFixed(1);
     }
 }
+    */
