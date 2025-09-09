@@ -16,7 +16,7 @@ function combination($n, $k)
     // Convirte "$n" y "$k" a su valor numerico
     $n = (int)$n;
     $k = (int)$k;
-
+//Valida: si alguno es negativo mediante un if y si es asi devuelve 0.
     if ($k < 0 || $n < 0) return 0;
     if ($k > $n) return 0;
     if ($k === 0 || $k === $n) return 1;
