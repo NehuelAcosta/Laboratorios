@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora basica</title>
+  <link rel="stylesheet" href="index1.css">
+</head>
+
+<body>
+
+  <h1>Calculadora basica</h1>
+
+  <div id="principal">
+    <div id="botones">
+      <a href="actividad.html">Basica</a>
+      <a href="bhaskara.html">Bhaskara</a>
+      <a href="Raices.html">Raices</a>
+      <a href="geometria.html">Geometria</a>
+      <a href="potencias.html">Potencias</a>
+    </div>
+
+    <div id="objetos">
+      <form action="basicos.php" method="post">
+        <input type="number" id="numero1" name="coeficiente1">
+        <select name="Operador">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">*</option>
+          <option value="/">/</option>
+        </select>
+        <input type="number" id="numero2" name="coeficiente2">
+        <input type="submit" value="Calcular">
+      </form>
+
+    </div>
+  </div>
+</body>
+
+</html>

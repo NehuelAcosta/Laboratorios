@@ -1,0 +1,16 @@
+#principal {
+    display: grid;
+    grid-template-columns:10% 80% ;
+    grid-template-rows: 20rem;
+}
+
+#botones {
+    display: flex;
+    flex-direction:column ;
+}
+
+#fila {
+    display: flex;
+    justify-content: space-between;
+}
+
