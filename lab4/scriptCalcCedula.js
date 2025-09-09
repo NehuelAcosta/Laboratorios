@@ -35,9 +35,16 @@ function validarCedula() {
 
     let resto = 10 - (suma % 10);
 
+    console.log("Resto: " + resto);
+    console.log("Numero Verificador: " + numVerificador);
+
     if (numVerificador === resto) {
         borrarErr();
         DOM_successMsg.textContent = "La cedula es valida";
+    } else if (resto === 10 && numVerificador === 0){
+        borrarErr();
+        DOM_successMsg.textContent = "La cedula es valida";
+
     } else {
         borrarSuccess();
         DOM_errMsg.textContent = "ERROR: La cedula no es valida";
