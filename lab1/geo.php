@@ -7,7 +7,7 @@ $Circulo = $_POST["Radio"];
 $TrianguloB = $_POST["TrianguloBase"];
 $TrianguloH = $_POST["TrianguloAltura"];
 
-//Funcio calcula radio
+//Funcion calcula radio
 
 function CalcularRadio () {
     global $Circulo;

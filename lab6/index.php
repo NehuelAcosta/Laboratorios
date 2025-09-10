@@ -38,7 +38,7 @@
     <h1>Laboratorio 6</h1>
     <h2>Selecciona el laboratorio que desees.</h2>
     <nav>
-        <a href="../lab1/index.php">Laboratorio 1</a>
+        <a href="../lab1/actividad.html">Laboratorio 1</a>
         <a href="../lab2/index.php">Laboratorio 2</a>
         <a href="../lab3/index.php">Laboratorio 3</a>
         <a href="../lab4/index.php">Laboratorio 4</a>
