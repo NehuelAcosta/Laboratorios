@@ -150,13 +150,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="?page=probabilidad">Probabilidad 5 de ORO</a>
         <a href="?page=factorial">Factorial</a>
     </nav>
-
+<!--se usan bloques de php para que el servidor entienda que eso tiene qwue ser ejecutado, si fuera un html normal no se ejecutaria-->
+    <!-- se usa el metodo get para ver que pagina es la que se quiere ejecutar--> 
     <!-- Si la pagina es "tablas" -->
     <?php if ($page === 'tablas'): ?>
         <h2>Tablas de multiplicar (1 a 10)</h2>
         <!-- Envia un formulario a la misma pagina -->
         <form method="post">
+            <!--Para distinguir qué formulario se envió, cada uno incluye:-->
             <input type="hidden" name="page" value="tablas">
+            
             <label for="numero">Numero:</label>
             <input type="number" name="numero" id="numero" required>
             <button type="submit">Mostrar tabla</button>
@@ -171,12 +174,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <th>x</th>
                         <th>resultado</th>
                     </tr>
-                    <?php foreach ($table as $mul => $val): ?>
+                    <?php foreach ($table as $mul => $val): ?> <!--foreach recorre el array $table, donde $mul es la clave (1 a 10) y $val el resultado de la multiplicación.-->
                         <tr>
                             <td><?php echo $numero . " x " . $mul; ?></td>
                             <td><?php echo $val; ?></td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php endforeach; ?> <!-- termina el foreach-->
                 </table>
             </div>
         <?php endif; ?>
@@ -185,8 +188,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php elseif ($page === 'probabilidad'): ?>
         <h2>Probabilidad - 5 de ORO</h2>
         <p>Ingresa la cantidad de veces que jugaste al 5 de Oro:</p>
+    <!-- Envia un formulario a la misma pagina -->
         <form method="post">
+            <!--valida si se envia el formulario-->
             <input type="hidden" name="page" value="probabilidad">
+            
             <label for="plays">Cantidad de jugadas:</label>
             <input type="number" name="plays" id="plays" min="1" required>
             <button type="submit">Calcular probabilidad</button>
@@ -195,15 +201,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($prob_percent)): ?>
             <div class="result">
                 <p>Con <?php echo htmlspecialchars($plays); ?> jugada(s), la probabilidad de ganar es:</p>
-                <strong><?php echo number_format($prob_percent, 8, '.', ''); ?> %</strong>
+                <strong><?php echo number_format($prob_percent, 8, '.', ''); ?> %</strong> 
+    <!--Muestra el valor de la probabilidad en porcentaje con 8 decimales, usando punto como separador decimal y sin separador de miles.-->
             </div>
         <?php endif; ?>
 
         <!-- Si la pagina es "factorial" -->
     <?php elseif ($page === 'factorial'): ?>
         <h2>Factorial (n!)</h2>
+        <!-- Envia un formulario a la misma pagina -->
         <form method="post">
+                <!--valida si se envia el formulario-->
             <input type="hidden" name="page" value="factorial">
+            
             <label for="n">Numero (entero no negativo):</label>
             <input type="number" name="n" id="n" min="0" required>
             <button type="submit">Calcular factorial</button>
@@ -212,6 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($fact)): ?>
             <div class="result">
                 <p>Factorial de <?php echo htmlspecialchars($n); ?> es:</p>
+                <!--imprime el número ingresado por el usuario, asegurando que no haya código malicioso.-->
                 <pre><?php echo $fact; ?></pre>
             </div>
         <?php endif; ?>
