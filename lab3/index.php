@@ -69,8 +69,10 @@ function operar($num1, $base1, $num2, $base2, $operacion)
     <!--Conversiones -->
     <h2>Conversor de Bases</h2>
     <form method="post">
-        <label>Numero: <input type="text" name="numero"></label>
+        <!--campo donde el usuario ingresa el número a convertir.-->
+        <label>Numero: <input type="text" name="numero"></label> 
         <label>Base:
+            <!--menú desplegable para elegir la base del número ingresado (decimal, binario, octal o hexadecimal).-->
             <select name="base">
                 <option value="10">Decimal</option>
                 <option value="2">Binario</option>
@@ -78,12 +80,14 @@ function operar($num1, $base1, $num2, $base2, $operacion)
                 <option value="16">Hexadecimal</option>
             </select>
         </label>
+        <!--<!--menú desplegable para elegir la base del número ingresado (decimal, binario, octal o hexadecimal).-->
         <button type="submit" name="convertir">Convertir</button>
     </form>
 
     <?php
     if (isset($_POST['convertir'])) {
         $resultado = convertir($_POST['numero'], $_POST['base']);
+        //Se imprime el resultado con un <h3> y un foreach que recorre cada base (decimal, binario, octal, hexadecimal) y su valor.//
         echo "<h3>Resultado:</h3>";
         foreach ($resultado as $base => $valor) {
             echo "$base: $valor <br>";
@@ -125,6 +129,7 @@ function operar($num1, $base1, $num2, $base2, $operacion)
 
     <?php
     if (isset($_POST['calcular'])) {
+        //Se llama a la función operar() para calcular la operación con los números y bases ingresadas.//
         $resultado = operar($_POST['num1'], $_POST['base1'], $_POST['num2'], $_POST['base2'], $_POST['operacion']);
         echo "<h3>Resultado:</h3>";
         foreach ($resultado as $base => $valor) {
