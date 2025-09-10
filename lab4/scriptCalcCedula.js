@@ -5,13 +5,13 @@ const DOM_successMsg = document.getElementById("successMsg");
 let cedula = [];
 
 function validarInput() {
-    cedula = DOM_cedula.value;
+    cedula = DOM_cedula.value; //Toma lo que escribió el usuario (DOM_cedula.value).
 
-    if (! (cedula.length == 8)){
+    if (! (cedula.length == 8)){//Si no tiene exactamente 8 cifras, borra mensajes de éxito y muestra un error.
         borrarSuccess();
         DOM_errMsg.textContent = "ERROR: La cedula debe tener 8 cifras";
     } else {
-        validarCedula();
+        validarCedula();//Si tiene 8 cifras, llama a validarCedula() para verificarla.
     }
 }
 
@@ -20,10 +20,10 @@ function validarCedula() {
     // (excepto el número identificador)
     const numsBase = [2, 9, 8, 7, 6, 3, 4];
 
-    // Guardar el valor numérico del último dígito
+    // Guardar el valor numérico del último dígito para confirmar que toda la cédula es válida.
     let numVerificador = Number(cedula[cedula.length - 1]);
 
-    // Pasar cada caracter a su valor numerico, excepto el último
+    // Pasar cada caracter a su valor numerico, excepto el último 
     for (let i = 0; i < cedula.length - 1; i++) {
         cedula[i] = Number(cedula[i]);
     }
