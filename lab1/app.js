@@ -1,30 +1,35 @@
-// Get calculator section divs
+// -------------------- DOM Elements --------------------
+
+// Obtener los divs de cada sección de calculadora
 const domBasicCalcDiv = document.getElementById("calc-basic");
 const domGeoCalcDiv = document.getElementById("calc-geo");
 const domBaskaraCalcDiv = document.getElementById("calc-baskara");
-const calcDivs = [domBasicCalcDiv, domGeoCalcDiv, domBaskaraCalcDiv];
+const calcDivs = [domBasicCalcDiv, domGeoCalcDiv, domBaskaraCalcDiv]; 
+// Array con todas las secciones para poder ocultarlas o mostrarlas fácilmente
 
-// Get basic calculator operator and number2 field
+// Obtener select del operador y el campo del segundo número en calculadora básica
 const domBasicOperator = document.getElementById("basic-operator");
 const domBasicCalcNumber2Field = document.getElementById("basic-number2-field");
 
-// Get geometry forms
+// Obtener los formularios de geometría
 const domGeoCuadradoForm = document.getElementById("form-cuadrado");
 const domGeoRectanguloForm = document.getElementById("form-rectangulo");
 const domGeoCircunferenciaForm = document.getElementById("form-circunferencia");
 const domGeoTrianguloForm = document.getElementById("form-triangulo");
 
-// Get other forms
+// Obtener otros formularios
 const domBasicForm = document.getElementById("form-basic");
 const domBaskaraForm = document.getElementById("form-baskara");
 
-// Group forms for easier handling
+// Agrupar formularios de geometría
 const geoForms = [
     domGeoCuadradoForm,
     domGeoRectanguloForm,
     domGeoCircunferenciaForm,
     domGeoTrianguloForm
 ];
+
+// Agrupar todos los formularios para manejarlos fácilmente
 const forms = [
     domGeoCuadradoForm,
     domGeoRectanguloForm,
@@ -34,42 +39,43 @@ const forms = [
     domBaskaraForm
 ];
 
-// Get navigation buttons
+// Obtener botones de navegación principal
 const domBtnShowBasicCalc = document.getElementById('btn-basic');
 const domBtnShowGeoCalc = document.getElementById('btn-geo');
 const domBtnShowBaskaraCalc = document.getElementById('btn-baskara');
 
-// Get geometry navigation buttons
+// Obtener botones de navegación dentro de geometría
 const domBtnGeoCuadrado = document.getElementById('geo-cuadrado');
 const domBtnGeoRectangulo = document.getElementById('geo-rectangulo');
 const domBtnGeoCircunferencia = document.getElementById('geo-circunferencia');
 const domBtnGeoTriangulo = document.getElementById('geo-triangulo');
 
-// Get result display elements
+// Obtener elementos de resultado
 const domResultDiv = document.getElementById('result-div');
 const domResultText = document.getElementById('result-text');
 
-// Store original display values for elements
+// Almacenar los valores originales de display de los elementos
 const originalElementDisplays = {};
 
-// Show an element, restoring its previous display value if hidden
-function showElement(element) {
-    // If already visible, do nothing
-    if (element.style.display != 'none') return;
 
-    // Restore previous display or use 'inherit' as fallback
+// -------------------- Show / Hide Elements --------------------
+
+// Mostrar un elemento, restaurando su display original si estaba oculto
+function showElement(element) {
+    if (element.style.display != 'none') return; // Si ya es visible, no hacer nada
+
+    // Restaurar valor original o usar 'inherit' por defecto
     if (element in originalElementDisplays)
         element.style.display = originalElementDisplays[element];
     else
         element.style.display = 'inherit';
 }
 
-// Hide an element and remember its current display value
+// Ocultar un elemento y recordar su valor de display
 function hideElement(element) {
-    // If already hidden, do nothing
-    if (element.style.display == 'none') return;
+    if (element.style.display == 'none') return; // Si ya está oculto, no hacer nada
 
-    // Save current display value or use 'inherit' if already none
+    // Guardar valor actual de display o usar 'inherit'
     if (element.style.display != 'none')
         originalElementDisplays[element] = element.style.display;
     else
@@ -78,40 +84,46 @@ function hideElement(element) {
     element.style.display = 'none';
 }
 
-// Hide all calculator sections
+
+// -------------------- Calculator Section Management --------------------
+
+// Ocultar todas las calculadoras
 function hideAllCalcs() {
     calcDivs.forEach(calcDiv => {
         hideElement(calcDiv);
     });
 }
 
-// Show basic calculator section
+// Mostrar calculadora básica
 function showBasicCalc() {
     hideAllCalcs();
     showElement(domBasicCalcDiv);
 }
 
-// Show geometry calculator section and default to square
+// Mostrar calculadora de geometría y mostrar cuadrado por defecto
 function showGeoCalc() {
     hideAllCalcs();
     showGeoCuadrado();
     showElement(domGeoCalcDiv);
 }
 
-// Show Baskara calculator section
+// Mostrar calculadora de Bhaskara
 function showBaskaraCalc() {
     hideAllCalcs();
     showElement(domBaskaraCalcDiv);
 }
 
-// Hide all geometry forms
+
+// -------------------- Geometry Forms Management --------------------
+
+// Ocultar todos los formularios de geometría
 function hideGeoCalcs() {
     geoForms.forEach(geoDiv => {
         hideElement(geoDiv);
     });
 }
 
-// Show specific geometry forms
+// Mostrar formularios específicos de geometría
 function showGeoCuadrado() {
     hideGeoCalcs();
     showElement(domGeoCuadradoForm);
@@ -132,35 +144,41 @@ function showGeoTriangulo() {
     showElement(domGeoTrianguloForm);
 }
 
-// Hide result display
+
+// -------------------- Result Display Management --------------------
+
+// Ocultar el div de resultado
 function hideResult() {
     hideElement(domResultDiv);
 }
 
-// Show result as success (green)
+// Mostrar resultado de éxito (verde)
 function showSuccessResult(message) {
     domResultText.innerText = message;
     domResultDiv.style.backgroundColor = 'green';
     showElement(domResultDiv);
 }
 
-// Show result as failure (red)
+// Mostrar resultado de error/fallo (rojo)
 function showFailureResult(message) {
     domResultText.innerText = message;
     domResultDiv.style.backgroundColor = 'red';
     showElement(domResultDiv);
 }
 
-// Show/hide number2 field based on selected operator
+
+// -------------------- Event Listeners --------------------
+
+// Cambiar visibilidad del campo number2 según el operador seleccionado
 domBasicOperator.addEventListener('change', e => {
     let selection = e.target.value;
-    if (selection == 'sqrt')
+    if (selection == 'sqrt') // Si es raíz cuadrada, ocultar number2
         hideElement(domBasicCalcNumber2Field);
     else
         showElement(domBasicCalcNumber2Field);
 });
 
-// Navigation button event listeners
+// Botones de navegación principal
 domBtnShowBasicCalc.addEventListener('click', () => {
     showBasicCalc();
 });
@@ -173,7 +191,7 @@ domBtnShowBaskaraCalc.addEventListener('click', () => {
     showBaskaraCalc();
 });
 
-// Geometry navigation button event listeners
+// Botones de navegación de geometría
 domBtnGeoCuadrado.addEventListener('click', () => {
     showGeoCuadrado();
 });
@@ -190,24 +208,27 @@ domBtnGeoTriangulo.addEventListener('click', () => {
     showGeoTriangulo();
 });
 
-// Handle form submissions for all forms
+
+// -------------------- Form Submissions --------------------
+
+// Manejar envíos de todos los formularios
 forms.forEach(form => {
     form.addEventListener("submit", e => {
-        e.preventDefault();
+        e.preventDefault(); // Evitar recarga de página
 
-        // Get form action and method
+        // Obtener action, method y datos del formulario
         let action = form.action;
         let method = form.method;
         let formData = new FormData(form);
 
-        // Submit form via fetch
+        // Enviar datos con fetch
         fetch(action, {
             method: method,
             body: formData
         })
-            .then(response => response.json())
+            .then(response => response.json()) // Esperar respuesta JSON
             .then(data => {
-                // Show result as success or failure
+                // Mostrar resultado según éxito o fallo
                 let showResultMethod = data.isFailure ? showFailureResult : showSuccessResult;
                 showResultMethod(data.content);
             })
@@ -217,6 +238,9 @@ forms.forEach(form => {
     });
 });
 
-// Initialize UI: show basic calc and hide result
+
+// -------------------- Initialize UI --------------------
+
+// Mostrar calculadora básica por defecto y ocultar resultados
 showBasicCalc();
 hideResult();

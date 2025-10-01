@@ -28,6 +28,7 @@ function validarCedula() {
         cedula[i] = Number(cedula[i]);
     }
 
+    // Sumar las unidades del resultado de cada multiplicacion
     let suma = 0;
     for (let i = 0; i < cedula.length - 1; i++) {
         suma += (cedula[i] * numsBase[i]) % 10;
@@ -35,9 +36,7 @@ function validarCedula() {
 
     let resto = 10 - (suma % 10);
 
-    console.log("Resto: " + resto);
-    console.log("Numero Verificador: " + numVerificador);
-
+    // Comprobar que el digito verificador sea correcto y decirle al usuario
     if (numVerificador === resto) {
         borrarErr();
         DOM_successMsg.textContent = "La cedula es valida";
