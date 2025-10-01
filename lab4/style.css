@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif; /* Fuente principal de la página */
+    background: #e4e4e4; /* Color de fondo gris claro */
+    margin: 0; /* Elimina márgenes predeterminados del navegador */
+    padding: 0; /* Elimina el padding predeterminado */
+    text-align: center; /* Centra el texto de forma global */
+}
+
+button {
+    background: #43a047; /* Color verde */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo puntero */
+    transition: background 0.2s; /* Animación suave al cambiar el fondo */
+    width: 65%; /* Ocupa todo el ancho del contenedor */
+    padding: 8px; /* Espacio interno */
+    margin: 0; /* Sin margen adicional */
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+#form {
+    margin-top: 10rem;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 20%;
+    margin-left: 38%;
+    padding-top: 1.5rem;
+    background-color: #f4f4f4;
+}
+
+#form * {
+    margin: 0.5rem;
+}
+
+button:hover {
+    background: #388e3c; /* Verde más oscuro al pasar el mouse */
+}
+

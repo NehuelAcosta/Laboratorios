@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin-top: 10rem;
+    /* Fuente principal de la página */
+    background: #e4e4e4;
+    /* Color de fondo gris claro */
+    margin: 0;
+    /* Elimina márgenes predeterminados del navegador */
+    padding: 0;
+    /* Elimina el padding predeterminado */
+    /* Centra el texto de forma global */
+}
+
+input[type='submit'] {
+    background: #43a047;
+    /* Color verde */
+    color: #fff;
+    /* Texto blanco */
+    border: none;
+    /* Sin borde */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Cursor tipo puntero */
+    transition: background 0.2s;
+    /* Animación suave al cambiar el fondo */
+    width: 100%;
+    /* Ocupa todo el ancho del contenedor */
+    padding: 8px;
+    /* Espacio interno */
+    margin: 0;
+    margin-top: 1rem;
+    /* Sin margen adicional */
+    box-sizing: border-box;
+    /* Incluye padding y borde en el ancho total */
+}
+
+form {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 20%;
+    background-color: #f4f4f4;
+    padding: 1.2rem 2rem 2rem 2rem;
+}
+
+form * {
+    margin: 1rem 0 1rem 0;
+}

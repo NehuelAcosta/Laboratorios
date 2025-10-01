@@ -39,14 +39,14 @@ function validarCedula() {
     // Comprobar que el digito verificador sea correcto y decirle al usuario
     if (numVerificador === resto) {
         borrarErr();
-        DOM_successMsg.textContent = "La cedula es valida";
+        DOM_successMsg.textContent = "La cedula es válida";
     } else if (resto === 10 && numVerificador === 0){
         borrarErr();
-        DOM_successMsg.textContent = "La cedula es valida";
+        DOM_successMsg.textContent = "La cedula es válida";
 
     } else {
         borrarSuccess();
-        DOM_errMsg.textContent = "ERROR: La cedula no es valida";
+        DOM_errMsg.textContent = "ERROR: La cedula no es válida";
     }
 }  
 
