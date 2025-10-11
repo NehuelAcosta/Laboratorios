@@ -1,59 +1,128 @@
-// Guardar DOM del input
-const DOM_cedula = document.getElementById("cedula");
-const DOM_errMsg = document.getElementById("errMsg");
-const DOM_successMsg = document.getElementById("successMsg");
-let cedula = [];
+// Guardar DOM de las etiquetas
+const DOM_bloqueValidar = document.getElementById("block-validar");
+const DOM_bloqueCrear = document.getElementById("block-crear");
 
-function validarInput() {
-    cedula = DOM_cedula.value; //Toma lo que escribió el usuario (DOM_cedula.value).
+const DOM_cedulaVerificar = document.getElementById("cedula-verificar");
+const DOM_cedulaCrear = document.getElementById("cedula-crear");
 
-    if (! (cedula.length == 8)){//Si no tiene exactamente 8 cifras, borra mensajes de éxito y muestra un error.
-        borrarSuccess();
-        DOM_errMsg.textContent = "ERROR: La cedula debe tener 8 cifras";
+const DOM_resultMsg = document.getElementById("result-msg");
+const DOM_resultDigit = document.getElementById("result-digit");
+
+/* Mostrar bloques */
+
+function showValidarBlock() {
+    hideMessage();
+    DOM_bloqueCrear.classList.add("hidden");
+    DOM_bloqueValidar.classList.remove("hidden");
+}
+
+function showCrearBlock() {
+    hideMessage();
+    DOM_bloqueValidar.classList.add("hidden");
+    DOM_bloqueCrear.classList.remove("hidden");
+}
+
+
+/* Funciones varias */
+
+function cantidadCifrasIngresadas(cedula, expectedLength) {
+    if (!(cedula.length == expectedLength)) { //Si no tiene exactamente 8 cifras, borra mensajes de éxito y muestra un error.
+        showMessage(`ERROR: La cedula debe tener ${expectedLength} cifras`, false);
+        return false;
     } else {
-        validarCedula();//Si tiene 8 cifras, llama a validarCedula() para verificarla.
+        return true;
     }
 }
 
-function validarCedula() {
+function calcularDigitoVerificador(cedula) {
     // Cada dígito de la cédula se multiplicará por su respectivo numero base 
     // (excepto el número identificador)
     const numsBase = [2, 9, 8, 7, 6, 3, 4];
 
-    // Guardar el valor numérico del último dígito para confirmar que toda la cédula es válida.
-    let numVerificador = Number(cedula[cedula.length - 1]);
-
     // Pasar cada caracter a su valor numerico, excepto el último 
-    for (let i = 0; i < cedula.length - 1; i++) {
+    for (let i = 0; i < cedula.length; i++) {
         cedula[i] = Number(cedula[i]);
     }
 
     // Sumar las unidades del resultado de cada multiplicacion
     let suma = 0;
-    for (let i = 0; i < cedula.length - 1; i++) {
+    for (let i = 0; i < cedula.length; i++) {
         suma += (cedula[i] * numsBase[i]) % 10;
     }
 
-    let resto = 10 - (suma % 10);
+    let numVerificador = 10 - (suma % 10);
 
-    // Comprobar que el digito verificador sea correcto y decirle al usuario
-    if (numVerificador === resto) {
-        borrarErr();
-        DOM_successMsg.textContent = "La cedula es válida";
-    } else if (resto === 10 && numVerificador === 0){
-        borrarErr();
-        DOM_successMsg.textContent = "La cedula es válida";
-
+    if (numVerificador === 10) {
+        return 0;
     } else {
-        borrarSuccess();
-        DOM_errMsg.textContent = "ERROR: La cedula no es válida";
+        return numVerificador;
     }
-}  
-
-function borrarSuccess(){
-    DOM_successMsg.textContent = "";
 }
 
-function borrarErr(){
-    DOM_errMsg.textContent = "";
+function showMessage(message, wasSuccess) {
+    DOM_resultMsg.classList.remove("hidden");
+
+    if (wasSuccess) {
+        DOM_resultMsg.classList.remove("error-msg");
+        DOM_resultMsg.classList.add("success-msg");
+    } else {
+        DOM_resultMsg.classList.remove("success-msg");
+        DOM_resultMsg.classList.add("error-msg");
+    }
+
+    DOM_resultMsg.innerText = message;
+}
+
+function hideMessage() {
+    DOM_resultMsg.classList.add("hidden");
+}
+
+function showResultDigit(content){
+    DOM_resultDigit.innerText = content;
+}
+
+
+/* Funcion de validar la cedula */
+
+function validarCedula() {
+    const cedula = DOM_cedulaVerificar.value; //Toma lo que escribió el usuario (DOM_cedula.value).
+
+    if ( !(cantidadCifrasIngresadas(cedula, 8))){
+        return;
+    }
+
+    // Tomamos los digitos que no son el verificador
+    const digitosCentrales = cedula.slice(0, -1);
+
+    // Tomar el ultimo digito
+    const ultimoDigito = Number(cedula[cedula.length - 1]);
+
+    // Calcular el digito verificador segun los valores dados
+    const digitoCalculado = calcularDigitoVerificador(digitosCentrales);
+
+    // Comprobar que el digito verificador sea correcto y decirle al usuario
+    if (ultimoDigito === digitoCalculado) {
+        showMessage("La cédula es válida", true);
+    } else if (ultimoDigito === 0 && digitoCalculado === 0) {
+        showMessage("La cédula es válida", true);
+    } else {
+        showMessage("ERROR: La cédula no es válida", false)
+    }
+}
+
+
+/* Funcion de crear digito verificador */
+
+function crearDigitoVerificador() {
+    const cedula = DOM_cedulaCrear.value; //Toma lo que escribió el usuario (DOM_cedula.value).
+
+    if ( !(cantidadCifrasIngresadas(cedula, 7))){
+        showResultDigit("?", false);
+        return;
+    }
+
+    const digitoVerificador = calcularDigitoVerificador(cedula);
+
+    showResultDigit(digitoVerificador);
+    hideMessage();
 }
