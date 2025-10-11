@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+nav a {
+    margin-right: 10px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: #eee;
+}
+
+form {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+}
+
+.result {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+input[type="number"] {
+    padding: 6px;
+}
+
+button {
+    padding: 6px 10px;
+}
+
+#btn-volver {
+    text-decoration: none;
+    color: black;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+#btn-volver:hover {
+    background-color: rgb(219, 219, 219);
+}

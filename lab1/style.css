@@ -118,3 +118,15 @@ input[type="submit"]:hover {
     color: white; /* Texto blanco */
     font-weight: bold; /* Negrita */
 }
+
+#btn-volver {
+    text-decoration: none;
+    color: black;
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-left: 1rem;
+}
+
+#btn-volver:hover {
+    background-color: rgb(219, 219, 219);
+}

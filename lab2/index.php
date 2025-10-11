@@ -90,54 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="utf-8">
     <title>Laboratorio II - App</title>
-    <style>
-        body {
-            font-family: Arial,
-                sans-serif;
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        nav a {
-            margin-right: 10px;
-            text-decoration: none;
-            padding: 6px 10px;
-            border-radius: 6px;
-            background: #eee;
-        }
-
-        form {
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-
-        table {
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 6px 10px;
-        }
-
-        .result {
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 6px;
-        }
-
-        input[type="number"] {
-            padding: 6px;
-        }
-
-        button {
-            padding: 6px 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -231,6 +184,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>Página no encontrada.</p>
     <?php endif; ?>
 
+    <a id="btn-volver" href="../lab6/index.php">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 -2 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+        Volver
+    </a>
 </body>
 
 </html>
