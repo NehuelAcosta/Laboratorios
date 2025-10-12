@@ -3,14 +3,50 @@ body {
     max-width: 900px;
     margin: 20px auto;
     padding: 0 15px;
+    text-align: center;
+    background: #f4f4f4; /* Color de fondo gris claro */
 }
 
-nav a {
-    margin-right: 10px;
+main {
+    max-width: 500px; /* Ancho máximo del contenedor principal */
+    margin: 40px auto; /* Centra el contenedor y agrega espacio arriba y abajo */
+    background: #fff; /* Fondo blanco */
+    padding: 32px 24px; /* Espaciado interno (arriba/abajo, izquierda/derecha) */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08); /* Sombra suave alrededor del contenedor */
+}
+
+.mode-buttons {
+    display: flex; /* Usa flexbox para los botones */
+    flex-wrap: wrap; /* Permite que los botones se ajusten a la siguiente línea si no caben */
+    gap: 10px; /* Espacio entre botones */
+    margin-bottom: 24px; /* Espacio debajo del contenedor de botones */
+    justify-content: space-around; /* Distribuye los botones con espacio uniforme */
+    align-items: center;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+}
+
+.mode-buttons a {
     text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    background: #eee;
+    padding: 12px 18px; /* Espaciado interno del botón */
+    border: none; /* Sin borde */
+    background: #1976d2; /* Color de fondo azul */
+    color: #fff; /* Texto blanco */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 1rem; /* Tamaño de fuente */
+    transition: background 0.2s; /* Animación suave al cambiar el color de fondo */
+    width: 100%; /* Ancho completo dentro del contenedor flex */
+    flex: 1 1 100px; /* Permite que los botones crezcan o se encojan y tengan mínimo 100px */
+}
+
+.mode-buttons .small-btn {
+    padding: 21px 18px;
+}
+
+/* Hover effect para los botones */
+.mode-buttons a:hover {
+    background: #1565c0; /* Cambio de color más oscuro al pasar el mouse */
 }
 
 form {
@@ -34,12 +70,43 @@ table, th, td {
     border-radius: 6px;
 }
 
-input[type="number"] {
-    padding: 6px;
+#result-table {
+    display: grid;
+    grid-template-columns: 47.5% 47.5%;
+    gap: 5%;
+}
+
+input {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 8px; /* Espacio interno */
+    margin: 0; /* Sin margen adicional */
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    border: 1px solid #bbb; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.container-userInput {
+    display: grid;
+    grid-template-columns: 70% 28%;
+    gap: 2%;
 }
 
 button {
     padding: 6px 10px;
+}
+
+button[type="submit"] {
+    background: #43a047; /* Color verde */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo puntero */
+    transition: background 0.2s; /* Animación suave al cambiar el fondo */
+}
+
+/* Hover effect del submit */
+button[type="submit"]:hover {
+    background: #388e3c; /* Verde más oscuro al pasar el mouse */
 }
 
 #btn-volver {
