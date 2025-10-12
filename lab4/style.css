@@ -56,7 +56,7 @@ input, button {
     display: flex;
     justify-content: space-around;
     align-content: center;
-    height: 2rem;
+    height: 2.05rem;
 }
 
 #cedula-crear {

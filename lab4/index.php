@@ -17,14 +17,14 @@
 
         <div id="block-validar">
             <h2>Ingrese la cédula</h2>
-            <input type="number" id="cedula-verificar">
+            <input type="number" id="cedula-verificar" placeholder="Ingrese la cédula aquí">
             <button class="enviar" onclick="validarCedula()">Enviar</button>
         </div>
 
         <div id="block-crear" class="hidden">
             <h2>Ingrese los primeros 7 dígitos de la cédula</h2>
             <div class="container"> 
-                <input type="number" id="cedula-crear">
+                <input type="number" id="cedula-crear" placeholder="Ingrese los números aquí">
                 <hr>
                 <p id="result-digit"></p>
             </div>
