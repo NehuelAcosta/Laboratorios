@@ -1,13 +1,13 @@
 // Guardar DOM del input
 const DOM_fichaEstudiante = document.getElementById("fichaEstudiante");
 const DOM_cedula = document.getElementById("cedula");
-const DOM_errMsg = document.getElementById("errMsg");
+const DOM_errMsg = document.getElementById("error-msg");
 
-DOM_fichaEstudiante.addEventListener("submit", function(event) {
+DOM_fichaEstudiante.addEventListener("submit", function (event) {
     event.preventDefault();
 
     // Validar inputs
-    if (!cedulaValida()){
+    if (!cedulaEsValida()) {
         return;
     }
 
@@ -15,13 +15,12 @@ DOM_fichaEstudiante.addEventListener("submit", function(event) {
 });
 
 // Comprobar que la cedula ingresada sea valida
-function cedulaValida() {
+function cedulaEsValida() {
     // Guardar la cedula como un array de caracteres
     let cedula = DOM_cedula.value;
 
-    if (!(cedula.length === 8)){
-        showErrMsg();
-        DOM_errMsg.textContent = "ERROR: La cedula debe tener 8 cifras";
+    if (!(cedula.length === 8)) {
+        showErrMsg("La cédula debe tener 8 cifras");
         return false;
     }
 
@@ -47,15 +46,25 @@ function cedulaValida() {
     // El digito verificador debe ser el valor que falta para alcanzar la proxima decena
     let resto = 10 - (suma % 10);
 
-    if (!(numVerificador === resto)) {
-        showErrMsg();
-        DOM_errMsg.textContent = "ERROR: La cedula no es valida";
+    if (numVerificador === resto) {
+        console.log(numVerificador);
+        console.log("resto: " + resto);
+        return true;
+    } else if (numVerificador === 0 && resto === 10) {
+        console.log(numVerificador);
+        console.log("resto: " + resto);
+        return true;
+    } else {
+        console.log(numVerificador);
+        console.log("resto: " + resto);
+        showErrMsg("La cédula no es válida");
         return false;
     }
 
-    return true;
-}  
 
-function showErrMsg(){
-    DOM_errMsg.setAttribute("style", "color: red; display: block;");
+}
+
+function showErrMsg(message) {
+    DOM_errMsg.classList.remove("hidden");
+    DOM_errMsg.textContent = message;
 }

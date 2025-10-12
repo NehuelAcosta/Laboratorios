@@ -2,7 +2,7 @@
 const btn_submit = document.getElementById("btn-submit");
 const DOM_promedio = document.getElementById("promedio");
 const DOM_situacion = document.getElementById("situacion");
-const DOM_errorMsg = document.getElementById("errorMsg");
+const DOM_errorMsg = document.getElementById("error-msg");
 const p_tags = document.getElementsByTagName("p");
 
 // Ejecutar la función "enviarJSON()" al hacer click en el boton "btn-submit"
@@ -37,7 +37,7 @@ function enviarJSON(notas) {
 function guardarNotas(){
     let notas = [];
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 6; i++) {
         // Cada nota ingresada se guarda en el array "notas[]"
         // Traer el valor de cada input
         let nota = document.getElementById("nota" + i).value;
@@ -57,61 +57,17 @@ function guardarNotas(){
 function notasValidas(notas){
     for (let i = 0; i < notas.length; i++){
         if (notas[i] < 0){
-            DOM_errorMsg.textContent = "ERROR: La nota no puede ser menor a 0";
+            DOM_errorMsg.textContent = "La nota no puede ser menor a 0";
             return false;
         }
 
         if (notas[i] > 12){
-            DOM_errorMsg.textContent = "ERROR: La nota no puede ser mayor a 12";
+            DOM_errorMsg.textContent = "La nota no puede ser mayor a 12";
             return false;
         }
 
         DOM_errorMsg.textContent = "";
-        return true;
     }
+
+    return true;
 }
-
-
-/* Estas funciones las voy a guardar por si las necesito en algun momento
-
-// Agregar nuevo valor y eliminar el más antiguo
-function arrayDisplace(array) {
-    let newArray = [];
-    for (let i = 0; i < array.length - 1; i++) {
-        newArray[i + 1] = array[i];
-    }
-
-    return newArray;
-}
-
-// Agregar nota al array "notas"
-function addToArray(array, value) {
-    if (array.length >= 10) { // Solo se tiene 
-        array = arrayDisplace(array);
-        array[0] = value;
-    } else {
-        array[array.length] = value;
-    }
-
-    return array;
-}
-
-// Sumar cada elemento del array y dividirlo por la cantidad total de elementos
-function calcPromedio(array) {
-    let suma = 0;
-    for (let i = 0; i < array.length; i++) {
-        suma += array[i];
-    }
-
-    promedio = suma / array.length;
-
-    if (promedio % 1 === 0) {
-        // Si es un entero, no es necesario usar "toFixed"
-        return parseInt(promedio);
-    } else {
-        // "toFixed(cifras)" permite redondear un numero hasta una cierta cantidad
-        // de cifras después del "."
-        return promedio.toFixed(1);
-    }
-}
-    */
