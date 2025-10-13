@@ -1,4 +1,4 @@
-<?php include_once "header.php"; ?>
+<?php include_once "headerAgregarNota.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
