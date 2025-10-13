@@ -1,6 +1,60 @@
-hr {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+body {
+    font-family: Arial, sans-serif; /* Fuente principal de la página */
+    background: #f4f4f4; /* Color de fondo gris claro */
+    margin: 0; /* Elimina márgenes predeterminados del navegador */
+    padding: 0;
+    padding-bottom: 1.2rem;
+    text-align: center; /* Centra el texto de forma global */
+}
+
+.forms-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 40px auto;
+    max-width: 1000px;
+    height: 28rem;
+    flex-wrap: wrap;
+}
+
+
+.form-card {
+    background-color: #fff;
+    padding: 35px 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 350px;
+    height: 100%;
+}
+
+.form-card input {
+    margin: 0.5rem 1rem;
+}
+
+#input-conversor {
+    margin-top: 2.5rem;
+}
+
+button#btn-calcular {
+    margin-top: 5.2rem;
+}
+
+button {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 8px; /* Espacio interno */
+    margin: 1.5rem auto;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+button[type="submit"] {
+    background: #43a047;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 0;
 }
 
 #btn-volver {

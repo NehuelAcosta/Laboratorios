@@ -12,65 +12,65 @@ include_once "funciones.php";
 </head>
 
 <body>
-    <h1>Laboratorio III</h1>
+    <div class="forms-container">
+        <div class="form-card">
+            <!--Conversiones -->
+            <h2>Conversor de Bases</h2>
+            <form method="post">
+                <!--campo donde el usuario ingresa el número a convertir.-->
+                <input type="text" name="numero" id="input-conversor" placeholder="Número" required>
+                <!--menú desplegable para elegir la base del número ingresado (decimal, binario, octal o hexadecimal).-->
+                <select name="base" id="select-conversor">
+                    <option value="10">Decimal</option>
+                    <option value="2">Binario</option>
+                    <option value="8">Octal</option>
+                    <option value="16">Hexadecimal</option>
+                </select>
+                <!-- menú desplegable para elegir la base del número ingresado (decimal, binario, octal o hexadecimal).-->
+                <button type="submit" name="convertir" id="btn-calcular">Convertir</button>
+            </form>
 
-    <!--Conversiones -->
-    <h2>Conversor de Bases</h2>
-    <form method="post">
-        <!--campo donde el usuario ingresa el número a convertir.-->
-        <label>Numero: <input type="text" name="numero" id="input-conversor"></label>
-        <label>Base:
-            <!--menú desplegable para elegir la base del número ingresado (decimal, binario, octal o hexadecimal).-->
-            <select name="base" id="select-conversor">
-                <option value="10">Decimal</option>
-                <option value="2">Binario</option>
-                <option value="8">Octal</option>
-                <option value="16">Hexadecimal</option>
-            </select>
-        </label>
-        <!-- menú desplegable para elegir la base del número ingresado (decimal, binario, octal o hexadecimal).-->
-        <button type="submit" name="convertir">Convertir</button>
-    </form>
+            <?php
+            if (isset($_POST['convertir'])) showResultConvertir();
+            ?>
+        </div>
 
-    <?php
-    if (isset($_POST['convertir'])) showResultConvertir();
-    ?>
+        <div class="form-card">
+            <!--Calculadora -->
+            <h2>Calculadora entre Bases</h2>
+            <form method="post">
+                <input type="text" name="num1" id="calcBases-input1" placeholder="Número 1" required>
+                <select name="base1" id="calcBases-select1">
+                    <option value="10">Decimal</option>
+                    <option value="2">Binario</option>
+                    <option value="8">Octal</option>
+                    <option value="16">Hexadecimal</option>
+                </select>
+                <br><br>
+                <input type="text" name="num2" id="calcBases-input2" placeholder="Número 1" required>
+                <select name="base2" id="calcBases-select2">
+                    <option value="10">Decimal</option>
+                    <option value="2">Binario</option>
+                    <option value="8">Octal</option>
+                    <option value="16">Hexadecimal</option>
+                </select>
+                <br><br>
+                <label>Operacion:
+                    <select name="operacion">
+                        <option value="suma">Suma</option>
+                        <option value="resta">Resta</option>
+                        <option value="multiplicacion">Multiplicacion</option>
+                        <option value="division">Division</option>
+                    </select>
+                </label>
+                <button type="submit" name="calcular">Calcular</button>
+            </form>
 
-    <hr>
-
-    <!--Calculadora -->
-    <h2>Calculadora entre Bases</h2>
-    <form method="post">
-        <label>Numero 1: <input type="text" name="num1" id="calcBases-input1"></label>
-        <select name="base1" id="calcBases-select1">
-            <option value="10">Decimal</option>
-            <option value="2">Binario</option>
-            <option value="8">Octal</option>
-            <option value="16">Hexadecimal</option>
-        </select>
-        <br><br>
-        <label>Numero 2: <input type="text" name="num2" id="calcBases-input2"></label>
-        <select name="base2" id="calcBases-select2">
-            <option value="10">Decimal</option>
-            <option value="2">Binario</option>
-            <option value="8">Octal</option>
-            <option value="16">Hexadecimal</option>
-        </select>
-        <br><br>
-        <label>Operacion:
-            <select name="operacion">
-                <option value="suma">Suma</option>
-                <option value="resta">Resta</option>
-                <option value="multiplicacion">Multiplicacion</option>
-                <option value="division">Division</option>
-            </select>
-        </label>
-        <button type="submit" name="calcular">Calcular</button>
-    </form>
-
-    <?php
-    if (isset($_POST['calcular'])) showResultCalcular();
-    ?>
+            <?php
+            if (isset($_POST['calcular'])) showResultCalcular();
+            ?>
+        </div>
+    </div>
 
     <br><br>
     <a id="btn-volver" href="../lab6/index.php">
