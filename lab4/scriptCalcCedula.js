@@ -27,7 +27,7 @@ function showCrearBlock() {
 
 function cantidadCifrasIngresadas(cedula, expectedLength) {
     if (!(cedula.length == expectedLength)) { //Si no tiene exactamente 8 cifras, borra mensajes de éxito y muestra un error.
-        showMessage(`ERROR: La cedula debe tener ${expectedLength} cifras`, false);
+        showMessage(`La cédula debe tener ${expectedLength} cifras`, false);
         return false;
     } else {
         return true;
@@ -106,7 +106,7 @@ function validarCedula() {
     } else if (ultimoDigito === 0 && digitoCalculado === 0) {
         showMessage("La cédula es válida", true);
     } else {
-        showMessage("ERROR: La cédula no es válida", false)
+        showMessage("La cédula no es válida", false)
     }
 }
 

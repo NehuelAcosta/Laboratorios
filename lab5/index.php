@@ -14,9 +14,9 @@
     <main>
         <h2>Ingresar Información del Estudiante</h2>
         <form action="agregarNota.php" method="post" id="fichaEstudiante">
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" minlength="4" required>
 
-            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido" minlength="4" required>
 
             <div id="container-cedula">
                 <input type="text" id="cedula" name="cedula" placeholder="Cédula" required>
