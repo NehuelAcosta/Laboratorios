@@ -5,7 +5,7 @@
     <input type="hidden" name="page" value="factorial">
 
     <div class="container-userInput">
-        <input type="number" name="n" id="n" min="0" placeholder="Número (entero no negativo)" required>
+        <input type="number" name="n" id="n" min="0" max="170" placeholder="Número (entero no negativo)" required>
         <button type="submit">Calcular factorial</button>
     </div>
 </form>
