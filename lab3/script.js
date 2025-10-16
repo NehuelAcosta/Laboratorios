@@ -62,6 +62,7 @@ inputConversor.addEventListener('input', e =>{
 });
 
 // En este caso, el evento 'change' se activa cuando el usuario elige una opcion en la etiqueta select
+// Si el usuario cambia la base (decima. binario, etc), se borra el contenido del input correspondiente
 selectConversor.addEventListener('change', () => {
     inputConversor.value = '';
 });

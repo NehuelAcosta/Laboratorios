@@ -21,7 +21,7 @@ include_once "scripts.php";
             <a href="?page=probabilidad">Probabilidad 5 de ORO</a>
             <a href="?page=factorial" class="small-btn">Factorial</a>
         </nav>
-        <!--se usan bloques de php para que el servidor entienda que eso tiene qwue ser ejecutado, si fuera un html normal no se ejecutaria-->
+        <!--se usan bloques de php para que el servidor entienda que eso tiene que ser ejecutado, si fuera un html normal no se ejecutaria-->
         <!-- se usa el metodo get para ver que pagina es la que se quiere ejecutar-->
         <!-- Si la pagina es "tablas" -->
         <?php if ($page === 'tablas') : include_once "bloqueTablas.php" ?>

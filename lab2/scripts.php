@@ -11,12 +11,13 @@ function table($num)
     return $result;
 }
 
+// Calcular la cantidad de posibles cobinaciones de numeros
 function combination($n, $k)
 {
     // Convirte "$n" y "$k" a su valor numerico
     $n = (int)$n;
     $k = (int)$k;
-//Valida: si alguno es negativo mediante un if y si es asi devuelve 0.
+    //Valida: si alguno es negativo mediante un if y si es asi devuelve 0.
     if ($k < 0 || $n < 0) return 0;
     if ($k > $n) return 0;
     if ($k === 0 || $k === $n) return 1;
@@ -37,7 +38,10 @@ function combination($n, $k)
 // Calcular la probabilidad de sacar el 5 de oro segun las jugadas hechas
 function CincoDeOroProbability($plays)
 {
-    //Si el número total es 0 o si no jugaste devuelve 0%.
+    // Si el número total es 0 o si no jugaste devuelve 0%.
+
+    // "n" = Cantidad de pelotas en el bolillero
+    // "k" = La cantidad de numeros que puedes elegir
     $total = combination(48, 5);
     if ($total == 0 || $plays < 1) {
         return 0.0;

@@ -5,7 +5,7 @@
     <input type="hidden" name="page" value="tablas">
 
     <div class="container-userInput">
-        <input type="number" name="numero" id="numero" max="999" placeholder="Número" required>
+        <input type="number" name="numero" id="numero" max="999" min="-999" placeholder="Número" required>
         <button type="submit">Mostrar tabla</button>
     </div>
 </form>

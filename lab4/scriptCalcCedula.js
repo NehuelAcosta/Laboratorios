@@ -48,9 +48,13 @@ function calcularDigitoVerificador(cedula) {
     let suma = 0;
     for (let i = 0; i < cedula.length; i++) {
         suma += (cedula[i] * numsBase[i]) % 10;
+        console.log("Valor actual de la suma total: " + suma);
     }
 
     let numVerificador = 10 - (suma % 10);
+
+    console.log("Digito verificador =  10 - " + (suma % 10));
+    console.log("Digito verificador = " + numVerificador);
 
     if (numVerificador === 10) {
         return 0;

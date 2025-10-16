@@ -7,6 +7,10 @@ $data = json_decode($input, true);
 
 $notas = $data["notas"];
 
+$data = [
+    "notas" => [0, 12, 2, 1, 11, 0, 0, 3]
+];
+
 // Hacer cálculos
 $suma = 0;
 $cantidadNotas = 0;
